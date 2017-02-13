@@ -13,7 +13,7 @@
         <!--Top Películas iTunes-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="EMDb" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ListViewController" customModule="EMDb" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -32,14 +32,14 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LwL-Od-rZ8">
                                 <rect key="frame" x="0.0" y="108" width="375" height="510"/>
                                 <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="h8n-BV-Iaj">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="h8n-BV-Iaj">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="movieCell" id="kgI-cu-rsx">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieCell" id="kgI-cu-rsx" customClass="MovieCell" customModule="EMDb" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="113" height="170"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -63,6 +63,7 @@
                                         </constraints>
                                         <size key="customSize" width="113" height="170"/>
                                         <connections>
+                                            <outlet property="movieImage" destination="LaP-Nf-ZU9" id="mu8-bP-Myo"/>
                                             <segue destination="jj2-od-ZB7" kind="show" identifier="detailSegue" id="baB-xV-Shb"/>
                                         </connections>
                                     </collectionViewCell>
@@ -80,7 +81,13 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="LwL-Od-rZ8" secondAttribute="bottom" id="iNq-vw-AiT"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Top Películas iTunes" id="1er-Yo-mwU"/>
+                    <navigationItem key="navigationItem" title="Top Películas iTunes" id="1er-Yo-mwU">
+                        <barButtonItem key="backBarButtonItem" title=" " id="skm-E6-P3T"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="collectionView" destination="LwL-Od-rZ8" id="p9k-pm-LhG"/>
+                        <outlet property="searchBar" destination="z9h-Ut-8pt" id="dje-fD-cIl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -89,7 +96,7 @@
         <!--Marcadas para ver-->
         <scene sceneID="0xC-AW-vmh">
             <objects>
-                <viewController id="yrq-Sa-XEs" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="yrq-Sa-XEs" customClass="FavoritesViewController" customModule="EMDb" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="odO-mb-n7g"/>
                         <viewControllerLayoutGuide type="bottom" id="QK3-wv-KGH"/>
@@ -101,14 +108,14 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1lZ-11-Uhz">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="CLS-AH-wq6">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="CLS-AH-wq6">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="movieCell" id="Qv2-aF-fCM">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieCell" id="Qv2-aF-fCM" customClass="MovieCell" customModule="EMDb" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="113" height="170"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -132,6 +139,7 @@
                                         </constraints>
                                         <size key="customSize" width="113" height="170"/>
                                         <connections>
+                                            <outlet property="movieImage" destination="1ch-NB-gem" id="M8g-0Q-zEv"/>
                                             <segue destination="jj2-od-ZB7" kind="show" identifier="detailSegue" id="owa-Dd-Ph6"/>
                                         </connections>
                                     </collectionViewCell>
@@ -146,16 +154,21 @@
                             <constraint firstItem="1lZ-11-Uhz" firstAttribute="top" secondItem="odO-mb-n7g" secondAttribute="bottom" id="p9Y-eg-xKr"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Marcadas para ver" id="R9n-1H-Ivx"/>
+                    <navigationItem key="navigationItem" title="Marcadas para ver" id="R9n-1H-Ivx">
+                        <barButtonItem key="backBarButtonItem" title=" " id="sca-tA-wV2"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="collectionView" destination="1lZ-11-Uhz" id="bHf-om-QJL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="abl-7T-oyh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2020" y="866.71664167916049"/>
         </scene>
-        <!--View Controller-->
+        <!--Movie View Controller-->
         <scene sceneID="4Lf-HI-aHo">
             <objects>
-                <viewController id="jj2-od-ZB7" sceneMemberID="viewController">
+                <viewController id="jj2-od-ZB7" customClass="MovieViewController" customModule="EMDb" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2gM-eS-sOj"/>
                         <viewControllerLayoutGuide type="bottom" id="tmp-Iy-faz"/>
@@ -225,6 +238,9 @@
                                         <state key="normal" title="No me interesa" backgroundImage="btn-off">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="favoritePressed:" destination="jj2-od-ZB7" eventType="touchUpInside" id="gGQ-5R-YiU"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.25882352941176467" green="0.25882352941176467" blue="0.25882352941176467" alpha="1" colorSpace="calibratedRGB"/>
@@ -274,6 +290,14 @@
                             <constraint firstItem="B6q-C9-sUN" firstAttribute="leading" secondItem="fA1-vt-Xgm" secondAttribute="leadingMargin" constant="20" id="udK-Qn-6Js"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="btnFavorite" destination="gfd-Pm-o72" id="dP7-FN-a5a"/>
+                        <outlet property="movieCategory" destination="OET-VF-dR4" id="75W-vC-wmH"/>
+                        <outlet property="movieDirector" destination="3Z9-7p-Qa3" id="Qef-pz-EhB"/>
+                        <outlet property="movieImage" destination="sdC-xC-fUt" id="zXU-6Z-AiZ"/>
+                        <outlet property="movieSummary" destination="Pke-y2-aTL" id="DXI-jM-umQ"/>
+                        <outlet property="movieTitle" destination="6P7-Xj-pF2" id="rN7-yG-BCZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bkX-y9-B6u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -357,6 +381,6 @@
         <image name="ver-icon" width="25" height="10"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="owa-Dd-Ph6"/>
+        <segue reference="baB-xV-Shb"/>
     </inferredMetricsTieBreakers>
 </document>

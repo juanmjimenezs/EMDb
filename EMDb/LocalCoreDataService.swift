@@ -66,6 +66,29 @@ class LocalCoreDataService {
         }
     }
     
+    ///Consultamos a Core Data por las peliculas favoritas
+    func getFavoriteMovies() -> [Movie]? {
+        let context = stack.persistentContainer.viewContext
+        let request: NSFetchRequest<MovieManaged> = MovieManaged.fetchRequest()
+        
+        let predicate = NSPredicate(format: "favorite = \(true)")
+        request.predicate = predicate
+        
+        do {
+            let fechedMovies = try context.fetch(request)
+            
+            var movies: [Movie] = [Movie]()
+            for managedMovie in fechedMovies {
+                movies.append(managedMovie.mappedObject())
+            }
+            
+            return movies
+        } catch {
+            print("Error obteniendo las peliculas favoritas")
+            return nil
+        }
+    }
+    
     ///Obtenemos las peliculas desde Core Data
     func queryTopMovies() -> [Movie]? {
         let context = stack.persistentContainer.viewContext
@@ -183,6 +206,50 @@ class LocalCoreDataService {
             try context.save()
         } catch {
             print("Error mientras borrabamos de Core Data")
+        }
+    }
+    
+    ///Retorna si la pelicula es o no favorita
+    func isMovieFavorite(movie: Movie) -> Bool {
+        if let _ = self.getMovieById(id: movie.id!, favorite: true) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    ///Si la pelicula está marcada como favorita entonces la elimina sino entonces la agrega a Core Data
+    func markUnmarkFavorite(movie: Movie) {
+        let context = stack.persistentContainer.viewContext
+        
+        if let exist = self.getMovieById(id: movie.id!, favorite: true) {
+            context.delete(exist)
+        } else {
+            let favorite = MovieManaged(context: context)
+            
+            favorite.id = movie.id
+            favorite.title = movie.title
+            favorite.summary = movie.summary
+            favorite.category = movie.category
+            favorite.director = movie.director
+            favorite.image = movie.image
+            favorite.favorite = true
+            
+            do {
+                try context.save()
+            } catch {
+                print("Error marcando la pelicula como favorita")
+            }
+        }
+        
+        self.updateFavoritesBadge()//Enviamos una notificación con el número de peliculas favoritas
+    }
+    
+    ///Enviamos una notificación con el número de peliculas favoritas
+    func updateFavoritesBadge() {
+        if let totalFavorites = self.getFavoriteMovies()?.count {
+            let notification = Notification(name: Notification.Name("updateFavoritesBadgeNotification"), object: totalFavorites, userInfo: nil)
+            NotificationCenter.default.post(notification)
         }
     }
 }
